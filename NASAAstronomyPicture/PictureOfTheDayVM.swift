@@ -13,7 +13,7 @@ struct PictureOfTheDayVM {
     func fetchAstronomyPicture(of date: Date,
                                completion: @escaping (_ response: PictureOfDay?,
                                                       _ error: Error?) -> Void) async {
-        await NetworkOperation.fetchAstronomyPicture(of: date.toString()) { response, error in
+        await NetworkOperation.fetchAstronomyPicture(of: date.toString(dateFormat: dateFormatterGet)) { response, error in
             guard let response = response,
                     error == nil else {
                         completion(nil, error)
