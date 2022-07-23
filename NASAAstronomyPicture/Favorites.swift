@@ -27,6 +27,12 @@ class Favorites: ObservableObject {
         pictures.contains(picture)
     }
     
+    /// returns sorted array by date
+    func sortedByDate(_ pictures: [PictureOfDay]) -> [PictureOfDay] {
+        return pictures.sorted(by: { if let date1 = $0.date, let date2 = $1.date { return date1 > date2 }
+            return false })
+    }
+    
     /// adds the picture to the array, updates all views, and saves the change
     func add(_ picture: PictureOfDay) {
         objectWillChange.send()

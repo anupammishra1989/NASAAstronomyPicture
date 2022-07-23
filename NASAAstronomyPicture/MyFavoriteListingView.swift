@@ -16,7 +16,7 @@ struct MyFavoriteListingView: View {
             ScrollView {
                 Spacer().frame(height: 20)
                 
-                ForEach (favorites.pictures, id: \ .url) { picture in
+                ForEach (favorites.sortedByDate(favorites.pictures), id: \ .url) { picture in
                     VStack {
                         ImageCardView(pictureOfDay: .constant(picture))
                     }.padding(.top, 10)
