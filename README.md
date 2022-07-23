@@ -16,11 +16,7 @@ App also supports -
 
 
 Screenshots:
-![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 26](https://user-images.githubusercontent.com/3205676/180602935-38bdb72d-ddec-4791-9441-b6d3caa48097.png)
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 40](https://user-images.githubusercontent.com/3205676/180602947-c6f00fb5-8d92-403a-8883-22a6d6ced1cc.png)
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 55](https://user-images.githubusercontent.com/3205676/180602953-79a18216-e326-491f-85aa-76235d97ec60.png)
+![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 26](https://user-images.githubusercontent.com/3205676/180602935-38bdb72d-ddec-4791-9441-b6d3caa48097.png) ![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 40](https://user-images.githubusercontent.com/3205676/180602947-c6f00fb5-8d92-403a-8883-22a6d6ced1cc.png) ![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 48 55](https://user-images.githubusercontent.com/3205676/180602953-79a18216-e326-491f-85aa-76235d97ec60.png)
 
 Dark Mode:
 ![Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-23 at 16 53 49](https://user-images.githubusercontent.com/3205676/180603378-f61386d7-10c4-466d-9e52-d0c44c2b8c3b.png)
