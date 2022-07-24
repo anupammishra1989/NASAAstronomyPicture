@@ -14,6 +14,7 @@ struct PictureOfTheDayView: View {
     @State var loadingState: LoadingState = .idle
     @State var pictureOfDay = PictureOfDay()
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var favorites: Favorites
     
     var body: some View {
         NavigationView {
@@ -59,17 +60,25 @@ struct PictureOfTheDayView: View {
     
     ///to load picture of the given day
     func loadData() {
-        Task {
-            loadingState = .loading
-            await pictureOfTheDayVM.fetchAstronomyPicture(of: selectedDate,
-                                                          completion: { response, error in
-                guard let response = response, error == nil else {
-                    loadingState = .failed
-                    return
-                }
-                pictureOfDay = response
-                loadingState = .loaded
-            })
+        //search the picture in favorites list and get it from their
+        let selectedDateString = selectedDate.toString(dateFormat: dateFormatterGet)
+        if favorites.pictures.contains(where: { $0.date == selectedDateString}),
+           let picture = favorites.pictures.first(where: { $0.date == selectedDateString}) {
+            pictureOfDay = picture
+        } else {
+            //Make API if picture is not present in the favorites list
+            Task {
+                loadingState = .loading
+                await pictureOfTheDayVM.fetchAstronomyPicture(of: selectedDate,
+                                                              completion: { response, error in
+                    guard let response = response, error == nil else {
+                        loadingState = .failed
+                        return
+                    }
+                    pictureOfDay = response
+                    loadingState = .loaded
+                })
+            }
         }
     }
 }
