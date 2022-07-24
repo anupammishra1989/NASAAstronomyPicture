@@ -15,10 +15,10 @@ struct PictureOfTheDayVM {
                                                       _ error: Error?) -> Void) async {
         await NetworkOperation.fetchAstronomyPicture(of: date.toString(dateFormat: dateFormatterGet)) { response, error in
             guard let response = response,
-                    error == nil else {
-                        completion(nil, error)
-                        return
-            }
+                  error == nil else {
+                      completion(nil, error)
+                      return
+                  }
             completion(mapPictureOfDay(response: response), error)
         }
     }
@@ -30,6 +30,8 @@ struct PictureOfTheDayVM {
                             hdurl: response.hdurl,
                             media_type: response.media_type,
                             title: response.title,
-                            url: response.url)
+                            url: response.url,
+                            code: response.code,
+                            msg: response.msg)
     }
 }

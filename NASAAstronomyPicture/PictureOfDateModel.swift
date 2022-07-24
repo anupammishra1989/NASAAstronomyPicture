@@ -16,4 +16,6 @@ struct PictureOfDateModel: Codable {
     let service_version: String?
     let title: String?
     let url: String?
+    let code: Int?
+    let msg: String?
 }

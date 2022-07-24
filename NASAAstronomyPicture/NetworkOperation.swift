@@ -10,8 +10,8 @@ import Foundation
 class NetworkOperation {
     
     class func fetchAstronomyPicture(of date: String,
-                               completion: @escaping (_ response: PictureOfDateModel?,
-                                                      _ error: Error?) -> Void) async {
+                                     completion: @escaping (_ response: PictureOfDateModel?,
+                                                            _ error: Error?) -> Void) async {
         // Create GET request
         var urlComponents = URLComponents(string: "https://api.nasa.gov/planetary/apod")
         
@@ -33,6 +33,12 @@ class NetworkOperation {
                 return
             }
             if let response = try? JSONDecoder().decode(PictureOfDateModel.self, from: data) {
+                if response.msg == nil,
+                   response.date == nil,
+                   response.url == nil {
+                    completion(nil, ServiceError.unknownError)
+                    return
+                }
                 completion(response, nil)
             }
         }

@@ -12,4 +12,15 @@ enum ServiceError: Error {
     case notFound
     case timeOut
     case unsuppotedURL
+    
+    var errorMessage: String {
+        switch self {
+        case .unknownError, .connectionError, .invalidRequest, .unsuppotedURL:
+            return "An unknown error occurred. Please try again later"
+        case .notFound:
+            return "Requested data not found, please try again later"
+        case .timeOut:
+            return "Your request timed out. Please retry the request"
+        }
+    }
 }

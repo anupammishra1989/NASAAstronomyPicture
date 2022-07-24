@@ -45,10 +45,16 @@ struct PictureOfTheDayView: View {
                     case .loading: ProgressView()
                     case .loaded:
                         VStack {
-                            ImageCardView(pictureOfDay: .constant(pictureOfDay))
+                            if let msg = pictureOfDay.msg, pictureOfDay.url == nil {
+                                //Display message returned in response
+                                Text(msg)
+                            } else {
+                                //Load image card
+                                ImageCardView(pictureOfDay: .constant(pictureOfDay))
+                            }
                         }
-                    case .failed:
-                        Text(failedToLoad)
+                    case .failed(let serviceError):
+                        Text(serviceError?.errorMessage ?? failedToLoad)
                     }
                 }
             }
@@ -73,7 +79,7 @@ struct PictureOfTheDayView: View {
                 await pictureOfTheDayVM.fetchAstronomyPicture(of: selectedDate,
                                                               completion: { response, error in
                     guard let response = response, error == nil else {
-                        loadingState = .failed
+                        loadingState = .failed(error as? ServiceError ?? .unknownError)
                         return
                     }
                     self.pictureOfDay = response
