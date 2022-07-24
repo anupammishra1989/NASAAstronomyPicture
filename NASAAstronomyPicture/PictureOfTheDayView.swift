@@ -29,7 +29,7 @@ struct PictureOfTheDayView: View {
                     VStack {
                         DatePickerView { date in
                             self.selectedDate = date
-                            self.loadData()
+                            self.loadPictureOfDay()
                         }
                         Divider()
                         Text("\(searchingFor) \(selectedDate.formatted(date: .long, time: .omitted))")
@@ -53,29 +53,30 @@ struct PictureOfTheDayView: View {
                 }
             }
             .onAppear(perform: {
-                loadData()
+                loadPictureOfDay()
             })
         }
     }
     
     ///to load picture of the given day
-    func loadData() {
+    func loadPictureOfDay() {
+        loadingState = .loading
         //search the picture in favorites list and get it from their
         let selectedDateString = selectedDate.toString(dateFormat: dateFormatterGet)
         if favorites.pictures.contains(where: { $0.date == selectedDateString}),
-           let picture = favorites.pictures.first(where: { $0.date == selectedDateString}) {
-            pictureOfDay = picture
+           let pictureOfDay = favorites.pictures.first(where: { $0.date == selectedDateString}) {
+            self.pictureOfDay = pictureOfDay
+            loadingState = .loaded
         } else {
             //Make API if picture is not present in the favorites list
             Task {
-                loadingState = .loading
                 await pictureOfTheDayVM.fetchAstronomyPicture(of: selectedDate,
                                                               completion: { response, error in
                     guard let response = response, error == nil else {
                         loadingState = .failed
                         return
                     }
-                    pictureOfDay = response
+                    self.pictureOfDay = response
                     loadingState = .loaded
                 })
             }
