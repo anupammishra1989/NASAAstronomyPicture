@@ -13,18 +13,18 @@ struct DatePickerView: View {
     
     var body: some View {
         
-            VStack {
-                DatePicker(selection: Binding(get: {
-                    self.searchDate
-                }, set: { newVal in
-                    self.searchDate = newVal
-                    dateChanged(searchDate)
-                }), in: ...Date(), displayedComponents: .date) {
-                    Text(selectADateText)
-                        .font(.headline)
-                }
-                .background(.bar)
+        VStack {
+            DatePicker(selection: Binding(get: {
+                self.searchDate
+            }, set: { newVal in
+                self.searchDate = newVal
+                dateChanged(searchDate)
+            }), in: ...Date(), displayedComponents: .date) {
+                Text(selectADateText)
+                    .font(.headline)
             }
+            .background(.bar)
+        }
     }
 }
 
